@@ -1,0 +1,25 @@
+// protoc --dart_out=grpc:lib/generated -Iprotos protos/thermostat.proto
+
+syntax = "proto3";
+
+package thermostat;
+
+enum Mode {
+  auto = 0;
+  heat = 1;
+  cool = 2;
+  off = 3;
+}
+
+service ThermostatService {
+  rpc SendMessage (ThermostatRequest) returns (TemperatureResponse);
+}
+
+message ThermostatRequest {
+  Mode mode = 1;
+  int32 setpoint = 2;
+}
+
+message TemperatureResponse {
+  double temperature = 1;
+}
